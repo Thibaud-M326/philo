@@ -28,11 +28,8 @@ int	is_digit(int c)
 	return (0);
 }
 
-// 1 == est valide
-// 0 == pas vilde
 int	is_pos_num(char *str_av)
 {
-	int	nb;
 	int	i;
 
 	i = 0;
@@ -46,8 +43,6 @@ int	is_pos_num(char *str_av)
 	return (1);
 }
 
-//argument valide == 1
-//argument invalide == 0
 int	check_args(int ac, char **av)
 {
 	int	i;
@@ -55,7 +50,6 @@ int	check_args(int ac, char **av)
 	i = 1;
 	if (ac < 5 || ac > 6)
 	{
-		printf("yo\n");
 		print_usage();
 		return (0);
 	}
@@ -63,7 +57,6 @@ int	check_args(int ac, char **av)
 	{
 		if (!is_pos_num(av[i]))
 		{
-			printf("yaewfaef\n");
 			print_usage();
 			return (0);
 		}
