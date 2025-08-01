@@ -7,11 +7,7 @@
 *.out
 
 # Fichiers exécutables (sans extension)
-# Décommente si ton exécutable n'a pas d'extension
-# main
-# program
-# philosophers
-# minishell
+philo
 
 # Fichiers de debug
 *.dSYM/
@@ -45,6 +41,7 @@ test_*
 debug
 valgrind-out.txt
 *.log
+*.txt
 
 # Fichiers système macOS
 .DS_Store

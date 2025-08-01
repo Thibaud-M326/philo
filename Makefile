@@ -6,9 +6,11 @@ SRC_DIR = ./srcs
 HEADER_DIR = ./include
 
 SRC =									\
-	$(SRC_DIR)/philo.c					\
 	$(SRC_DIR)/check_args.c				\
-	$(SRC_DIR)/ft_atoi.c
+	$(SRC_DIR)/ft_atoi.c				\
+	$(SRC_DIR)/init_philo.c				\
+	$(SRC_DIR)/philo.c					\
+	$(SRC_DIR)/time.c					\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)

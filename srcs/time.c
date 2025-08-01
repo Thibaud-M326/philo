@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-30 23:49:31 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-07-30 23:49:31 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <sys/time.h>
 #include "philo.h"
 
-int	main(int argc, char **argv)
+long	get_start_time(void)
 {
-	t_data	data;
+	struct timeval	time;
+	long			start_time;
 
-	if (!check_args(argc, argv))
-		return (0);
-	if (init_philo(&data, argv) == NULL)
-		return (0);
-	return (0);
+	if (gettimeofday(&time, NULL) == -1)
+		return (-1);
+	start_time = time.tv_sec * 1000 | time.tv_usec / 1000;
+	return (start_time);
 }

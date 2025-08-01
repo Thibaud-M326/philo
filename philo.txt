@@ -6,7 +6,6 @@ recevoir que des chiffres positif sur mes 4 (oblige) 5 (optielle)
 creer des structure pour les data, et les philo
 comprendre le sujet pour comprendre les structure
 
-
 number_of_philosophers: The number of philosophers and also the number
 of forks.
 
@@ -26,4 +25,182 @@ philosopher dies.
 
 
 si on a moin de 4 arguments ou plus de 5 : on ecrit usage on retourne 0
-si on a un des 4 ou 5 arguments qui n'est pas un chiffre positif valide on retourne 0
+si on a un des 4 ou 5 arguments qui n'est pas un chiffre positif valide on retourne
+0
+
+
+
+en gros je dois faire des philo qui on des timing pour penser manger dormir,
+il doivent prendre les fourchette, trouver comment prendre les fourchette.
+
+
+
+
+
+avoir ma propre fonction de calcul de temp
+
+
+mes philo doivent avoir acces
+
+:
+id
+thread
+time_to_eat
+time_to_sleep
+time_to_die
+r_fork
+l_fork
+
+ma structure data
+:
+nb_philo
+forks
+philos
+run_sim
+
+--------------------------------------------
+
+VALGRIND :
+
+— DRD: Run with valgrind --tool=drd to check for data races.
+
+— Helgrind: Run with valgrind --tool=helgrind to find lock issues and potential
+deadlocks.
+
+— FSanitise: Compile with -fsanitize=thread to detect threading problems while
+running.
+
+--------------------------------------------
+
+ce que je pourrais faire maintenant,
+
+determiner l'utilite d'une liste chaine circulaire,
+comprendre comment et pourquoi calculer le temp
+faire un shema qui va me donner la marche a suivre
+faire ma conception.
+
+1 - traiter les arguments
+	tout au dessus de 0
+
+2 - pas de liste chaine
+	on cree les philo dans un tableau de struct
+	on fait philo[i + 1 % nb_philo] pour faire le tour de la boucle
+
+3 - creer les thread des philo
+	on utilise pthreadcreate en boucle
+
+4 - creer le thread moniteur
+	vas checker sur chaque philo si le temp du dernier repas + du sleep
+	excede le temp pour mourir, si oui un variable est set sur tous les
+	philos qui vont return pour "mourir" dans le thread
+	on affiche dans le moniteur le moment ou on a envoye la variable
+	philo has died -> on arrete la simulation
+		pareil pour le cas ou on doit compter le nombre
+		de fois qu'un philo a manger dans ce cas la
+		on check le nombre a manger, envoi une variable end_simu
+		dans tous les philo, ils arretent
+		en fait c;est une fois qu'il on tous mange suffisament
+		on ecrit fin de simu philos have eaten x time
+
+4 - determiner les ordre dans lequel les philo vont prendre les fourchette
+	on check si les deux fourchette sont dispo si oui on prend les
+	deux en meme temps, on decale les philo pair et impair
+
+5 - comprendre comment on bloque une fourchette et debloque
+	les m_forks sont des variable, quand je veut acceder a l'une
+	je vais la bloquer et un philo ne peut pas acceder
+
+6 - comtper les temps de eat + sleep + think < time_to_die
+	dans le moniteur
+
+7 - creer ma fonction de calcul du temps (usleep imprecis)
+	pas obligatoire on peut faire des petit usleep pour
+	faire la meme chose
+
+8 - comprendre le role du moniteur
+
+
+
+[Arguments] → [Validation] → [Init structures]
+                                   ↓
+[Création liste circulaire] → [Init mutexes fourchettes]
+                                   ↓
+[Création threads philo] → [Lancement moniteur]
+                                   ↓
+[Boucle de vie philo] : think → take_forks → eat → put_forks → sleep
+                                   ↓
+[Moniteur] : vérifie mort/nb_repas en continu
+
+
+
+
+
+creer des philo, en tableau de structure.
+
+
+
+les thread, les mutex, le temps,
+
+
+verifier les argument
+initialiser les data (creer les philo, ajouter les arguments)
+creer les philo en liste chaine -> attribuer une fonction routine
+creer le moniteur -> attribuer une fonction monitor
+
+
+donc je fait :
+
+
+donc en fait je creer les fourchette independament des philo,
+en fait les philo c'est juste des structure qui on un thread,
+en dautre donne,
+
+2. Initialisation des fourchettes
+
+void init_forks_and_philos(t_data *data) {
+    // 1. Créer le tableau de fourchettes
+    data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
+
+    // 2. Initialiser chaque fourchette
+    for (int i = 0; i < data->nb_philos; i++) {
+        pthread_mutex_init(&data->forks[i], NULL);
+    }
+
+    // 3. Assigner les pointeurs aux philos
+    for (int i = 0; i < data->nb_philos; i++) {
+        data->philos[i].left_fork = &data->forks[i];
+        data->philos[i].right_fork = &data->forks[(i + 1) % data->nb_philos];
+    }
+}
+
+--------------------------------------------
+
+dans quel cas on peut avoir des sortie du programme ?
+
+quand les philo on mange le nombre de repas demande
+quand un philo est mort
+
+sinon la simulation continue sans s'arreter
+
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
