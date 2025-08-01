@@ -13,13 +13,11 @@
 #include <stdlib.h>
 #include "philo.h"
 
-void	clean_data(t_data *data)
+void	clean_forks(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (!data)
-		return ;
 	if (data->forks)
 	{
 		while (i < data->nb_philo)
@@ -30,10 +28,31 @@ void	clean_data(t_data *data)
 		free(data->forks);
 		data->forks = NULL;
 	}
+	return ;
+}
+
+void	clean_philos(t_data *data)
+{
 	if (data->philos)
 	{
 		free(data->philos);
 		data->philos = NULL;
 	}
+	return ;
+}
+
+void	clean_mutex(t_data *data)
+{
+	pthread_mutex_destroy(&data->print);
+	return ;
+}
+
+void	clean_data(t_data *data)
+{
+	if (!data)
+		return ;
+	clean_forks(data);
+	clean_philos(data);
+	clean_mutex(data);
 	return ;
 }

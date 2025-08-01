@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   monitor_thread.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 17:18:13 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 17:18:13 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
+#include <stdio.h>
 #include "philo.h"
 
-long	get_current_time(void)
+int	create_monitor_thread(t_data *data)
 {
-	struct timeval	time;
-	long			start_time;
+	if (pthread_create(&data->monitor, NULL, &monitor_routine, data) != 0)
+		return (0);
+	return (1);
+}
 
-	if (gettimeofday(&time, NULL) == -1)
-		return (-1);
-	start_time = time.tv_sec * 1000 | time.tv_usec / 1000;
-	return (start_time);
+int	join_monitor_thread(t_data *data)
+{
+	if (pthread_join(data->monitor, NULL) != 0)
+		return (0);
+	return (1);
 }

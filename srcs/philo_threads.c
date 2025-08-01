@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   philo_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 16:57:40 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 16:57:40 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
 #include "philo.h"
 
-long	get_current_time(void)
+int	philo_threads(t_data *data)
 {
-	struct timeval	time;
-	long			start_time;
-
-	if (gettimeofday(&time, NULL) == -1)
-		return (-1);
-	start_time = time.tv_sec * 1000 | time.tv_usec / 1000;
-	return (start_time);
+	(void)data;
+	return (0);
 }

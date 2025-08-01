@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   stop_simulation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 21:05:44 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 21:05:44 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
 #include "philo.h"
 
-long	get_current_time(void)
+void	stop_simulation(t_data *data)
 {
-	struct timeval	time;
-	long			start_time;
+	int	i;
 
-	if (gettimeofday(&time, NULL) == -1)
-		return (-1);
-	start_time = time.tv_sec * 1000 | time.tv_usec / 1000;
-	return (start_time);
+	i = 0;
+	data->run_monitor = 0;
+	while (i < data->nb_philo)
+	{
+		data->philos[i].run_philo = 0;
+		i++;
+	}
+	return ;
 }

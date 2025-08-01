@@ -7,9 +7,15 @@ HEADER_DIR = ./include
 
 SRC =									\
 	$(SRC_DIR)/check_args.c				\
+	$(SRC_DIR)/clean_data.c				\
 	$(SRC_DIR)/ft_atoi.c				\
 	$(SRC_DIR)/init_philo.c				\
+	$(SRC_DIR)/monitor_routine.c		\
+	$(SRC_DIR)/monitor_thread.c			\
+	$(SRC_DIR)/philo_threads.c			\
 	$(SRC_DIR)/philo.c					\
+	$(SRC_DIR)/printf_mutex.c			\
+	$(SRC_DIR)/stop_simulation.c		\
 	$(SRC_DIR)/time.c					\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

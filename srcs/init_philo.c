@@ -26,11 +26,10 @@ t_data	*init_data_av(t_data *data, char **av)
 		data->nb_must_eat = ft_atoi(av[5]);
 	else
 		data->nb_must_eat = -1;
-	data->flag_dead = 0;
-	data->flag_all_ate = 0;
-	data->start_time = get_start_time();
+	data->start_time = get_current_time();
 	if (data->start_time == -1)
 		return (NULL);
+	data->run_monitor = 1;
 	return (data);
 }
 
@@ -62,6 +61,16 @@ t_data	*init_data_forks(t_data *data)
 	return (data);
 }
 
+t_data	*init_data_mutex(t_data *data)
+{
+	if (pthread_mutex_init(&data->print, NULL) != 0)
+	{
+		clean_data(data);
+		return (NULL);
+	}
+	return (data);
+}
+
 t_data	*init_data_philo(t_data *data)
 {
 	int	i;
@@ -78,6 +87,7 @@ t_data	*init_data_philo(t_data *data)
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
 		data->philos[i].last_meal_time = data->start_time;
 		data->philos[i].meals_eaten = 0;
+		data->philos[i].run_philo = 1;
 		i++;
 	}
 	return (data);
@@ -88,6 +98,8 @@ t_data	*init_philo(t_data *data, char **av)
 	if (init_data_av(data, av) == NULL)
 		return (NULL);
 	if (init_data_forks(data) == NULL)
+		return (NULL);
+	if (init_data_mutex(data) == NULL)
 		return (NULL);
 	if (init_data_philo(data) == NULL)
 		return (NULL);

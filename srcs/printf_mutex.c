@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   printf_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 19:00:57 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 19:00:57 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
+#include <stdio.h>
 #include "philo.h"
 
-long	get_current_time(void)
+void	printf_mutex(t_data *data, char *str, int id_philo)
 {
-	struct timeval	time;
-	long			start_time;
+	long	current_time;
 
-	if (gettimeofday(&time, NULL) == -1)
-		return (-1);
-	start_time = time.tv_sec * 1000 | time.tv_usec / 1000;
-	return (start_time);
+	current_time = get_current_time();
+	pthread_mutex_lock(&data->print);
+	printf("%ld %d %s\n", current_time, id_philo, str);
+	pthread_mutex_unlock(&data->print);
+	return ;
 }

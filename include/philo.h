@@ -12,38 +12,62 @@
 
 #include <pthread.h>
 
+typedef struct s_data	t_data;
+
 typedef struct s_philo
 {
 	int					id;
-	pthread_t			thread;
+	pthread_t			philo;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	long				last_meal_time;
 	int					meals_eaten;
+	int					run_philo;
+	t_data				*data;
 }	t_philo;
 
 typedef struct s_data
 {
 	int					nb_philo;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
+	long				time_to_die;
+	long				time_to_eat;
+	long				time_to_sleep;
 	int					nb_must_eat;
-	int					flag_dead;
-	int					flag_all_ate;
+	int					run_monitor;
 	long				start_time;
+	pthread_t			monitor;
 	t_philo				*philos;
 	pthread_mutex_t		*forks;
+	pthread_mutex_t		print;
 }	t_data;
 
 //	check_args.c
 int		check_args(int ac, char **av);
 
+//	clean_data.c
+void	clean_data(t_data *data);
+
 //	ft_atoi.c
 int		ft_atoi(const char *nptr);
+
+//	monitor_routine.c
+void	*monitor_routine(void *v_data);
+
+//	monitor_thread.c
+int		create_monitor_thread(t_data *data);
+int		join_monitor_thread(t_data *data);
+
+//	philo_thread.c
+int		philo_threads(t_data *data);
+
+//	philo_mutex.c
+void	printf_mutex(t_data *data, char *str, int id_philo);
 
 //	init_philo.c
 t_data	*init_philo(t_data *data, char **av);
 
+//	stop_simulation.c
+void	stop_simulation(t_data *data);
+
 //	time.c
-long	get_start_time(void);
+long	get_current_time(void);
