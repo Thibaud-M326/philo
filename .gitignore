@@ -6,6 +6,9 @@
 *.exe
 *.out
 
+# Images
+*.png
+
 # Fichiers exécutables (sans extension)
 philo
 
