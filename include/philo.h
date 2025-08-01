@@ -12,6 +12,8 @@
 
 #include <pthread.h>
 
+	#include <stdio.h>
+
 typedef struct s_data	t_data;
 
 typedef struct s_philo
@@ -61,7 +63,8 @@ int		join_monitor_thread(t_data *data);
 int		philo_threads(t_data *data);
 
 //	philo_mutex.c
-void	printf_mutex(t_data *data, char *str, int id_philo);
+void	printf_mutex_ate_enough(t_data *data);
+void	printf_mutex(t_data *data, char *msg, int id_philo);
 
 //	init_philo.c
 t_data	*init_philo(t_data *data, char **av);

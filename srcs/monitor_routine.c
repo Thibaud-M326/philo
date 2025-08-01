@@ -10,54 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <string.h>
 #include "philo.h"
 
-	#include <stdio.h>
-	#include <unistd.h>
-
-//le monitor thread sert a suivre l'etat des
-//thread de philos
-
-//si un philo n'a pas mange depuis plus longtemp
-//que le time to die,
-//on va afficher le philo qui est mort
-//on vas mettre la variable
-//philo->run_philo a 0 sur tous les philos,
-//les philo vont stopper leur routine (on doit verifier
-//que la variable est a 0 tous le temps, et dans toutes les boucles)
-//
-//autre cas de figure
-//les philos on tous mange suffisament
-//on check sur tous les philos si la variable
-//philo->meals_eaten est arrive au data->nb_must_eat
-//a chaque fois qu'un philo a atteint la variable
-//on ajoute dans un tableau a son index == 1
-//on verifie a chaque tour de boucle si le tableau est rempli de 1
-//si oui on stoppe la verification et
-//on va mettre la variable run_philo a 0 sur tous les philo
-//les philo vont stopper leur routine (on doit verifier
-//que la variable est a 0 tous le temps, et dans toutes les boucles)
-
-//creer le thread
-//creer sa routine
-//		une fonction is_a_philo_dead()
-//		une fonction is_all_philos_eaten_enough()
-
-// si la difference entre le temp actuel et le temp du dernier repas est
-// superieur a time_to_die, le philo est mort
-
-
-// dernier repas : 150
-// temp actuel   : 200
-// time to die   : 100
-
-// 200 - 150 = 50
-// 50 < ttd
-
-void	is_all_philos_eaten_enough(t_data *data)
+int	philos_ate_enough(t_data *data, int *philos_meals_eaten)
 {
-	(void)data;
-	return ;
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (philos_meals_eaten[i] == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_all_philos_eaten_enough(t_data *data)
+{
+	int	*philos_meals_eaten;
+	int	i;
+
+	i = 0;
+	philos_meals_eaten = malloc(sizeof (int) * data->nb_philo);
+	if (!philos_meals_eaten)
+		return (-1);
+	memset(philos_meals_eaten, 0, sizeof (int) * data->nb_philo);
+	while (i < data->nb_philo)
+	{
+		if (data->philos[i].meals_eaten == data->nb_must_eat)
+			philos_meals_eaten[i] = 1;
+		i++;
+	}
+	if (philos_ate_enough(data, philos_meals_eaten))
+	{
+		printf_mutex_ate_enough(data);
+		stop_simulation(data);
+	}
+	return (1);
 }
 
 void	is_a_philo_dead(t_data *data)
@@ -91,8 +83,11 @@ void	*monitor_routine(void *v_data)
 	while (data->run_monitor)
 	{
 		is_a_philo_dead(data);
-		if (data->run_monitor)
-			is_all_philos_eaten_enough(data);
+		if (data->run_monitor && data->nb_must_eat != -1)
+		{
+			if (is_all_philos_eaten_enough(data) == -1)
+				stop_simulation(data);
+		}
 	}
 	return (NULL);
 }

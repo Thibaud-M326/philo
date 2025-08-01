@@ -13,13 +13,24 @@
 #include <stdio.h>
 #include "philo.h"
 
-void	printf_mutex(t_data *data, char *str, int id_philo)
+void	printf_mutex_ate_enough(t_data *data)
+{
+	long	cur_t;
+
+	cur_t = get_current_time();
+	pthread_mutex_lock(&data->print);
+	printf("%ld philos have all eaten %d times\n", cur_t, data->nb_must_eat);
+	pthread_mutex_unlock(&data->print);
+	return ;
+}
+
+void	printf_mutex(t_data *data, char *msg, int id_philo)
 {
 	long	current_time;
 
 	current_time = get_current_time();
 	pthread_mutex_lock(&data->print);
-	printf("%ld %d %s\n", current_time, id_philo, str);
+	printf("%ld %d %s\n", current_time, id_philo, msg);
 	pthread_mutex_unlock(&data->print);
 	return ;
 }

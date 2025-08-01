@@ -71,7 +71,7 @@ t_data	*init_data_mutex(t_data *data)
 	return (data);
 }
 
-t_data	*init_data_philo(t_data *data)
+t_data	*init_data_philos(t_data *data)
 {
 	int	i;
 
@@ -101,7 +101,7 @@ t_data	*init_philo(t_data *data, char **av)
 		return (NULL);
 	if (init_data_mutex(data) == NULL)
 		return (NULL);
-	if (init_data_philo(data) == NULL)
+	if (init_data_philos(data) == NULL)
 		return (NULL);
 	return (data);
 }

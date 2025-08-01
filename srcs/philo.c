@@ -14,14 +14,14 @@
 #include "philo.h"
 
 // j'ai initialiser les data
-//je doit maintenant creer mes thread
-//avec le tableau de philo contenu dans data
-//je vais creer le thread monitor en premier
-//je vais creer les threads philo
-//les thread vont avoir leur routine
-//ensuite j'attend les thread pour les fermer
-//je clean_data : free et detruit les mutexe
-//on sort du programme
+// je doit maintenant creer mes thread
+// avec le tableau de philo contenu dans data
+// je vais creer le thread monitor en premier
+// je vais creer les threads philo
+// les thread vont avoir leur routine
+// ensuite j'attend les thread pour les fermer
+// je clean_data : free et detruit les mutexe
+// on sort du programme
 int	main(int argc, char **argv)
 {
 	t_data	data;
