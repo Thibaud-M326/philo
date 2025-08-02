@@ -12,8 +12,41 @@
 
 #include "philo.h"
 
-int	philo_threads(t_data *data)
+int	create_philo_threads(t_data *data)
 {
-	(void)data;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->nb_philo)
+	{
+		if (pthread_create(
+				&data->philos[i].philo, NULL,
+				&philo_routine, &data->philos[i]) != 0)
+		{
+			while (j < i)
+			{
+				pthread_join(data->philos[j].philo, NULL);
+				j++;
+			}
+			stop_simulation(data);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	join_philo_threads(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_join(data->philos[i].philo, NULL);
+		i++;
+	}
 	return (0);
 }

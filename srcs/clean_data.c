@@ -41,9 +41,23 @@ void	clean_philos(t_data *data)
 	return ;
 }
 
-void	clean_mutex(t_data *data)
+void	clean_data_mutex(t_data *data)
 {
 	pthread_mutex_destroy(&data->print);
+	return ;
+}
+
+void	clean_philo_mutex(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_destroy(data->philos[i].left_fork);
+		pthread_mutex_destroy(data->philos[i].right_fork);
+		i++;
+	}
 	return ;
 }
 
@@ -53,6 +67,7 @@ void	clean_data(t_data *data)
 		return ;
 	clean_forks(data);
 	clean_philos(data);
-	clean_mutex(data);
+	clean_data_mutex(data);
+	clean_philo_mutex(data);
 	return ;
 }

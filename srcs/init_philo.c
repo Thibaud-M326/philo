@@ -88,6 +88,7 @@ t_data	*init_data_philos(t_data *data)
 		data->philos[i].last_meal_time = data->start_time;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].run_philo = 1;
+		data->philos[i].data = data;
 		i++;
 	}
 	return (data);

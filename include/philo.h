@@ -59,10 +59,21 @@ void	*monitor_routine(void *v_data);
 int		create_monitor_thread(t_data *data);
 int		join_monitor_thread(t_data *data);
 
-//	philo_thread.c
-int		philo_threads(t_data *data);
+//	philo_actions.c
+void	eat(t_philo *philo);
+void	sleep(t_philo *philo);
+void	think(void);
+void	put_forks(t_philo *philo);
+void	take_forks(t_philo *philo);
 
-//	philo_mutex.c
+//	philo_thread.c
+int		create_philo_threads(t_data *data);
+int		join_philo_threads(t_data *data);
+
+//	philo_routine.c
+void	*philo_routine(void *v_data);
+
+//	print_mutex.c
 void	printf_mutex_ate_enough(t_data *data);
 void	printf_mutex(t_data *data, char *msg, int id_philo);
 
@@ -74,3 +85,4 @@ void	stop_simulation(t_data *data);
 
 //	time.c
 long	get_current_time(void);
+int		ft_usleep(long milliseconds);

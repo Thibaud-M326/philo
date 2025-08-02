@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 	if (init_philo(&data, argv) == NULL)
 		return (0);
 	create_monitor_thread(&data);
+	create_philo_threads(&data);
+	join_philo_threads(&data);
 	join_monitor_thread(&data);
 	clean_data(&data);
 	return (0);
