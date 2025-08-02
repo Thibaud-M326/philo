@@ -12,6 +12,8 @@ SRC =									\
 	$(SRC_DIR)/init_philo.c				\
 	$(SRC_DIR)/monitor_routine.c		\
 	$(SRC_DIR)/monitor_thread.c			\
+	$(SRC_DIR)/philo_actions.c			\
+	$(SRC_DIR)/philo_routine.c			\
 	$(SRC_DIR)/philo_threads.c			\
 	$(SRC_DIR)/philo.c					\
 	$(SRC_DIR)/printf_mutex.c			\

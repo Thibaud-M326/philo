@@ -12,15 +12,6 @@
 
 #include "philo.h"
 
-//la routine des philos c'est
-//tant que run_philo == 1
-//on test avant chaque boucle si la simulation est finie
-//
-//essai de prendre des fourchette
-//
-//	take_forks
-//
-
 int	is_dead(t_data *data)
 {
 	if (data->run_monitor)
@@ -38,12 +29,12 @@ void	*philo_routine(void *v_philo)
 		take_forks(philo);
 		if (is_dead(philo->data))
 			put_forks(philo);
-		eat();
+		eating(philo);
 		put_forks(philo);
 		if (!is_dead(philo->data))
-			sleep();
+			sleeping(philo);
 		if (!is_dead(philo->data))
-			think();
+			thinking(philo);
 	}
-	return ;
+	return (NULL);
 }

@@ -49,6 +49,7 @@ int	is_all_philos_eaten_enough(t_data *data)
 		printf_mutex_ate_enough(data);
 		stop_simulation(data);
 	}
+	free(philos_meals_eaten);
 	return (1);
 }
 

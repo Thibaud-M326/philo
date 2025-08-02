@@ -60,9 +60,9 @@ int		create_monitor_thread(t_data *data);
 int		join_monitor_thread(t_data *data);
 
 //	philo_actions.c
-void	eat(t_philo *philo);
-void	sleep(t_philo *philo);
-void	think(void);
+void	eating(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
 void	put_forks(t_philo *philo);
 void	take_forks(t_philo *philo);
 
@@ -71,6 +71,7 @@ int		create_philo_threads(t_data *data);
 int		join_philo_threads(t_data *data);
 
 //	philo_routine.c
+int		is_dead(t_data *data);
 void	*philo_routine(void *v_data);
 
 //	print_mutex.c

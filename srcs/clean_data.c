@@ -66,8 +66,8 @@ void	clean_data(t_data *data)
 	if (!data)
 		return ;
 	clean_forks(data);
+	clean_philo_mutex(data);
 	clean_philos(data);
 	clean_data_mutex(data);
-	clean_philo_mutex(data);
 	return ;
 }

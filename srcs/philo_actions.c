@@ -12,20 +12,23 @@
 
 #include "philo.h"
 
-void	eat(t_philo *philo)
+void	eating(t_philo *philo)
 {
-	(void)philo;
+	printf_mutex(philo->data, "is eating", philo->id);
+	ft_usleep(philo->data->time_to_eat);
 	return ;
 }
 
-void	sleep(t_philo *philo)
+void	sleeping(t_philo *philo)
 {
-	(void)philo;
+	printf_mutex(philo->data, "is sleeping", philo->id);
+	ft_usleep(philo->data->time_to_sleep);
 	return ;
 }
 
-void	think(void)
+void	thinking(t_philo *philo)
 {
+	printf_mutex(philo->data, "is thinking", philo->id);
 	return ;
 }
 
@@ -44,7 +47,7 @@ void	take_forks(t_philo *philo)
 		if (is_dead(philo->data))
 		{
 			pthread_mutex_unlock(philo->right_fork);
-			return (1);
+			return ;
 		}
 		pthread_mutex_lock(philo->left_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
@@ -56,7 +59,7 @@ void	take_forks(t_philo *philo)
 		if (is_dead(philo->data))
 		{
 			pthread_mutex_unlock(philo->left_fork);
-			return (1);
+			return ;
 		}
 		pthread_mutex_lock(philo->right_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
