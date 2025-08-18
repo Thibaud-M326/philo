@@ -13,6 +13,7 @@
 #include <pthread.h>
 
 	#include <stdio.h>
+	#include <unistd.h>
 
 typedef struct s_data	t_data;
 

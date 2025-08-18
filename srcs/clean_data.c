@@ -31,6 +31,21 @@ void	clean_forks(t_data *data)
 	return ;
 }
 
+//a voir si cette fonction ne fait pas le doublon avec clean_forks()
+void	clean_philo_mutex(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_destroy(data->philos[i].left_fork);
+		pthread_mutex_destroy(data->philos[i].right_fork);
+		i++;
+	}
+	return ;
+}
+
 void	clean_philos(t_data *data)
 {
 	if (data->philos)
@@ -44,20 +59,6 @@ void	clean_philos(t_data *data)
 void	clean_data_mutex(t_data *data)
 {
 	pthread_mutex_destroy(&data->print);
-	return ;
-}
-
-void	clean_philo_mutex(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_mutex_destroy(data->philos[i].left_fork);
-		pthread_mutex_destroy(data->philos[i].right_fork);
-		i++;
-	}
 	return ;
 }
 
