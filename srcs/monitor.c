@@ -12,6 +12,28 @@
 
 #include "philo.h"
 
+void	is_a_philo_dead(t_data *data)
+{
+	int		i;
+	long	last_meal_time;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_lock(&data->philos[i].last_meal_time_mtx);
+		last_meal_time = data->philos[i].last_meal_time;
+		if (get_current_time() - last_meal_time >= data->time_to_die)
+		{
+			printf_mutex(data, "died", data->philos[i].id);
+			pthread_mutex_lock(&data->run_sim_mtx);
+			data->run_sim = 0;
+			pthread_mutex_unlock(&data->run_sim_mtx);
+		}
+		pthread_mutex_unlock(&data->philos[i].last_meal_time_mtx);
+		i++;
+	}
+}
+
 //le monitor doit checker sur tous les philo dans une boucle si
 //l'un d'eux est mort
 //on doit bloquer le moniteur tant que philo->last_time_eat_mtx
@@ -21,6 +43,9 @@ int	monitor(t_data *data)
 {
 	set_start_times(data);
 	pthread_mutex_unlock(&data->start_sim_mtx);
-
+	while (is_sim_running)
+	{
+		is_a_philo_dead(data);
+	}
 	return (0);
 }
