@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 00:03:20 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 00:03:20 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-25 13:01:36 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-25 13:01:36 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ t_data	*init_data_av(t_data *data, char **av)
 		data->nb_must_eat = ft_atoi(av[5]);
 	else
 		data->nb_must_eat = -1;
-	data->start_time = get_current_time();
-	if (data->start_time == -1)
-		return (NULL);
-	data->run_monitor = 1;
+	data->start_time = 0;
+	data->run_sim = 1;
 	return (data);
 }
 
@@ -40,7 +38,7 @@ t_data	*init_data_forks(t_data *data)
 
 	i = 0;
 	j = 0;
-	data->forks = malloc(sizeof (pthread_mutex_t) * data->nb_philo);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->forks)
 		return (NULL);
 	while (i < data->nb_philo)
@@ -68,6 +66,19 @@ t_data	*init_data_mutex(t_data *data)
 		clean_data(data);
 		return (NULL);
 	}
+	if (pthread_mutex_init(&data->run_sim_mtx, NULL) != 0)
+	{
+		pthread_mutex_destroy(&data->print);
+		clean_data(data);
+		return (NULL);
+	}
+	if (pthread_mutex_init(&data->start_sim_mtx, NULL) != 0)
+	{
+		pthread_mutex_destroy(&data->print);
+		pthread_mutex_destroy(&data->run_sim_mtx);
+		clean_data(data);
+		return (NULL);
+	}
 	return (data);
 }
 
@@ -82,12 +93,11 @@ t_data	*init_data_philos(t_data *data)
 	memset(data->philos, 0, sizeof(t_philo));
 	while (i < data->nb_philo)
 	{
-		data->philos[i].id = i;
+		data->philos[i].id = i + 1;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
-		data->philos[i].last_meal_time = data->start_time;
+		data->philos[i].last_meal_time = 0;
 		data->philos[i].meals_eaten = 0;
-		data->philos[i].run_philo = 1;
 		data->philos[i].data = data;
 		i++;
 	}
@@ -96,8 +106,7 @@ t_data	*init_data_philos(t_data *data)
 
 t_data	*init_philo(t_data *data, char **av)
 {
-	if (init_data_av(data, av) == NULL)
-		return (NULL);
+	init_data_av(data, av);
 	if (init_data_forks(data) == NULL)
 		return (NULL);
 	if (init_data_mutex(data) == NULL)

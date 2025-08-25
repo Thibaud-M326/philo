@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stop_simulation.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-01 21:05:44 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-01 21:05:44 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-25 11:55:56 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-25 11:55:56 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "philo.h"
 
-void	stop_simulation(t_data *data)
+int	main(int argc, char **argv)
 {
-	int	i;
+	t_data	data;
 
-	i = 0;
-	data->run_monitor = 0;
-	while (i < data->nb_philo)
-	{
-		data->philos[i].run_philo = 0;
-		i++;
-	}
-	return ;
+	if (!check_args(argc, argv))
+		return (0);
+	if (init_philo(&data, argv) == NULL)
+		return (0);
+	create_philo_threads(&data);
+	return (0);
 }

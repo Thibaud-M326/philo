@@ -39,7 +39,6 @@ int	is_pos_num(char *str_av)
 			return (0);
 		i++;
 	}
-
 	return (1);
 }
 
