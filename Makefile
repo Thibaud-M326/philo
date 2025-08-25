@@ -8,14 +8,18 @@ HEADER_DIR = ./include
 SRC =									\
 	$(SRC_DIR)/check_args.c				\
 	$(SRC_DIR)/clean_data.c				\
+	$(SRC_DIR)/ft_atoi.c				\
 	$(SRC_DIR)/init_philo.c				\
+	$(SRC_DIR)/is_sim_running.c			\
 	$(SRC_DIR)/main.c					\
 	$(SRC_DIR)/monitor.c				\
+	$(SRC_DIR)/philo_actions.c			\
 	$(SRC_DIR)/philo_routine.c			\
 	$(SRC_DIR)/philo_threads.c			\
+	$(SRC_DIR)/print_mutex.c			\
 	$(SRC_DIR)/set_start_times.c		\
-	$(SRC_DIR)/wait_start.c				\
 	$(SRC_DIR)/time.c					\
+	$(SRC_DIR)/wait_start.c				\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)

@@ -19,8 +19,7 @@ int	create_philo_threads(t_data *data)
 
 	i = 0;
 	j = 0;
-	if (pthread_mutex_lock(&data->start_sim_mtx) != 0)
-		return (1);
+	pthread_mutex_lock(&data->start_sim_mtx);
 	while (i < data->nb_philo)
 	{
 		if (pthread_create(
