@@ -15,7 +15,6 @@
 // on wait la fin de la creation de tous les philo
 // on decale les pair du tte
 // on fait la routine eat sleep think
-
 void	*philo_routine(void *v_philo)
 {
 	t_philo	*philo;

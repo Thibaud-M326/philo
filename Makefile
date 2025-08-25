@@ -15,6 +15,7 @@ SRC =									\
 	$(SRC_DIR)/philo_threads.c			\
 	$(SRC_DIR)/start_times.c			\
 	$(SRC_DIR)/wait_start.c				\
+	$(SRC_DIR)/time.c					\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)

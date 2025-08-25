@@ -69,3 +69,10 @@ int		ft_atoi(const char *nptr);
 
 //	srcs/start_times.c
 int		set_start_times(t_data *data);
+
+//	srcs/wait_start.c
+void	wait_start(t_data *data);
+
+//	srcs/time.c
+long	get_current_time(void);
+int		ft_usleep(long milliseconds);

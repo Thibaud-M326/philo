@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_times.c                                      :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-25 16:46:28 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-25 16:46:28 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-01 00:45:52 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-01 00:45:52 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/time.h>
+#include <unistd.h>
 #include "philo.h"
 
-//va set les temps de data et des philo au temps actuel
-//pas de race condition sur les philos car ils seront en wait
-//sinon on peut aussi les proteger si on en a quelque chose a foutre
-int	set_start_times(t_data *data)
+long	get_current_time(void)
 {
-	data->
+	struct timeval	time;
+	long			start_time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		return (-1);
+	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (start_time);
+}
+
+int	ft_usleep(long milliseconds)
+{
+	long	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
 	return (0);
 }

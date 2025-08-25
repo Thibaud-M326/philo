@@ -15,8 +15,6 @@
 int	monitor(t_data *data)
 {
 	set_start_times(data);
-	if (pthread_mutex_unlock(&data->start_sim_mtx) != 0)
-		return (1);
-
+	pthread_mutex_unlock(&data->start_sim_mtx);
 	return (0);
 }
