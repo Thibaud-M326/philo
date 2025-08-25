@@ -19,10 +19,7 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 		if (!is_sim_running(philo->data))
-		{
 			pthread_mutex_unlock(philo->right_fork);
-			return (1);
-		}
 		pthread_mutex_lock(philo->left_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 		pthread_mutex_lock(&philo->last_meal_time_mtx);
@@ -32,10 +29,7 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 		if (!is_sim_running(philo->data))
-		{
 			pthread_mutex_unlock(philo->left_fork);
-			return (1);
-		}
 		pthread_mutex_lock(philo->right_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 	}
@@ -76,7 +70,7 @@ int	eat(t_data *data, t_philo *philo)
 	return (0);
 }
 
-int	sleep(t_data *data, t_philo *philo)
+int	sleeping(t_data *data, t_philo *philo)
 {
 	if (!is_sim_running(data))
 		return (0);

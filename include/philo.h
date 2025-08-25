@@ -66,7 +66,7 @@ int		monitor(t_data *data);
 
 //	srcs/philo_actions.c
 int		eat(t_data *data, t_philo *philo);
-int		sleep(t_data *data, t_philo *philo);
+int		sleeping(t_data *data, t_philo *philo);
 int		think(t_data *data, t_philo *philo);
 
 //	srcs/philo_routine.c

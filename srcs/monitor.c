@@ -24,10 +24,12 @@ void	is_a_philo_dead(t_data *data)
 		last_meal_time = data->philos[i].last_meal_time;
 		if (get_current_time() - last_meal_time >= data->time_to_die)
 		{
+			printf("bonjour a tous\n");
 			printf_mutex(data, "died", data->philos[i].id);
 			pthread_mutex_lock(&data->run_sim_mtx);
 			data->run_sim = 0;
 			pthread_mutex_unlock(&data->run_sim_mtx);
+			return ;
 		}
 		pthread_mutex_unlock(&data->philos[i].last_meal_time_mtx);
 		i++;
@@ -43,7 +45,7 @@ int	monitor(t_data *data)
 {
 	set_start_times(data);
 	pthread_mutex_unlock(&data->start_sim_mtx);
-	while (is_sim_running)
+	while (is_sim_running(data))
 	{
 		is_a_philo_dead(data);
 	}

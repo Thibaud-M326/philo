@@ -17,8 +17,8 @@ int	is_sim_running(t_data *data)
 	pthread_mutex_lock(&data->run_sim_mtx);
 	if (data->run_sim == 0)
 	{
-		return (0);
 		pthread_mutex_unlock(&data->run_sim_mtx);
+		return (0);
 	}
 	pthread_mutex_unlock(&data->run_sim_mtx);
 	return (1);

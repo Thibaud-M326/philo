@@ -31,11 +31,11 @@ int	create_philo_threads(t_data *data)
 				pthread_join(data->philos[j].philo, NULL);
 				j++;
 			}
-			return (0);
+			return (1);
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	join_philo_threads(t_data *data)

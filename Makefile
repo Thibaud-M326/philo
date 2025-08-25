@@ -16,7 +16,7 @@ SRC =									\
 	$(SRC_DIR)/philo_actions.c			\
 	$(SRC_DIR)/philo_routine.c			\
 	$(SRC_DIR)/philo_threads.c			\
-	$(SRC_DIR)/print_mutex.c			\
+	$(SRC_DIR)/printf_mutex.c			\
 	$(SRC_DIR)/set_start_times.c		\
 	$(SRC_DIR)/time.c					\
 	$(SRC_DIR)/wait_start.c				\
