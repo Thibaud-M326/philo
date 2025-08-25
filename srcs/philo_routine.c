@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-25 11:55:56 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-25 11:55:56 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-25 16:10:54 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-25 16:10:54 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "philo.h"
 
-int	main(int argc, char **argv)
-{
-	t_data	data;
+// on wait la fin de la creation de tous les philo
+// on decale les pair du tte
+// on fait la routine eat sleep think
 
-	if (!check_args(argc, argv))
-		return (0);
-	if (init_philo(&data, argv) == NULL)
-		return (0);
-	if (create_philo_threads(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
-	if (monitor(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
-	return (0);
+void	*philo_routine(void *v_philo)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)v_philo;
+	wait_start(philo->data);
+	return (NULL);
 }

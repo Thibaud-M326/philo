@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-25 11:55:56 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-25 11:55:56 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-25 16:20:37 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-25 16:20:37 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	monitor(t_data *data)
 {
-	t_data	data;
+	set_start_times(data);
+	if (pthread_mutex_unlock(&data->start_sim_mtx) != 0)
+		return (1);
 
-	if (!check_args(argc, argv))
-		return (0);
-	if (init_philo(&data, argv) == NULL)
-		return (0);
-	if (create_philo_threads(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
-	if (monitor(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
 	return (0);
 }

@@ -10,7 +10,11 @@ SRC =									\
 	$(SRC_DIR)/clean_data.c				\
 	$(SRC_DIR)/init_philo.c				\
 	$(SRC_DIR)/main.c					\
+	$(SRC_DIR)/monitor.c				\
+	$(SRC_DIR)/philo_routine.c			\
 	$(SRC_DIR)/philo_threads.c			\
+	$(SRC_DIR)/start_times.c			\
+	$(SRC_DIR)/wait_start.c				\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)

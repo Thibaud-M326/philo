@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   wait_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-08-25 11:55:56 by thmaitre          #+#    #+#             */
-/*   Updated: 2025-08-25 11:55:56 by thmaitre         ###   ########.fr       */
+/*   Created: 2025-08-25 16:53:37 by thmaitre          #+#    #+#             */
+/*   Updated: 2025-08-25 16:53:37 by thmaitre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	wait_start(t_data *data)
 {
-	t_data	data;
-
-	if (!check_args(argc, argv))
-		return (0);
-	if (init_philo(&data, argv) == NULL)
-		return (0);
-	if (create_philo_threads(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
-	if (monitor(&data) == 1)
-	{
-		//clean
-		return (0);
-	}
-	return (0);
+	pthread_mutex_lock(&data->start_sim_mtx);
+	pthread_mutex_unlock(&data->start_sim_mtx);
 }

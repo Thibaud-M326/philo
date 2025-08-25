@@ -55,8 +55,17 @@ void	clean_data(t_data *data);
 //	srcs/init_philo.c
 t_data	*init_philo(t_data *data, char **av);
 
+//	srcs/monitor.c
+int		monitor(t_data *data);
+
+//	srcs/philo_routine.c
+void	*philo_routine(void *v_philo);
+
 //	srcs/philo_threads.c
 int		create_philo_threads(t_data *data);
 
 //	srcs/ft_atoi.c
 int		ft_atoi(const char *nptr);
+
+//	srcs/start_times.c
+int		set_start_times(t_data *data);
