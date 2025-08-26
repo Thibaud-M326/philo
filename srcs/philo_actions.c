@@ -54,7 +54,12 @@ int	eat(t_data *data, t_philo *philo)
 	if (take_forks(philo) == 1)
 		return (1);
 	printf_mutex(philo->data, "is eating", philo->id);
-	ft_usleep_sim_running(data, data->time_to_eat);
+	if (ft_usleep_sim_running(data, data->time_to_eat) == 1)
+	{
+		printf("run sim : %d\n", data->run_sim);
+		put_forks(philo);
+		return (1);
+	}
 	pthread_mutex_lock(&philo->last_meal_time_mtx);
 	philo->last_meal_time = get_current_time();
 	pthread_mutex_unlock(&philo->last_meal_time_mtx);
@@ -74,18 +79,13 @@ int	sleeping(t_data *data, t_philo *philo)
 	return (0);
 }
 
-int	think(t_data *data, t_philo *philo)
+int	think(t_data *dt, t_philo *philo)
 {
-	long	tte;
-	long	tts;
-
-	tte = data->time_to_eat;
-	tts = data->time_to_sleep;
-	if (!is_sim_running(data))
+	if (!is_sim_running(dt))
 		return (0);
-	if (data->nb_philo % 2 != 0)
-		ft_usleep_sim_running(data, 2 * tte - tts);
-	if (is_sim_running(data))
+	if (dt->nb_philo % 2 != 0)
+		ft_usleep_sim_running(dt, 2 * dt->time_to_eat - dt->time_to_sleep);
+	if (is_sim_running(dt))
 		printf_mutex(philo->data, "is thinking", philo->id);
 	return (0);
 }

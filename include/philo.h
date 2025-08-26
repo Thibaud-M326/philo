@@ -17,6 +17,8 @@
 
 typedef struct s_data	t_data;
 
+//faire une structure pour les fork
+
 typedef struct s_philo
 {
 	int					id;
