@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -I./include
+CFLAGS = -g3 -Wall -Wextra -Werror -MMD -MP -I./include
 
 OBJ_DIR = ./obj
 SRC_DIR = ./srcs

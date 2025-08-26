@@ -24,14 +24,15 @@ void	is_a_philo_dead(t_data *data)
 		last_meal_time = data->philos[i].last_meal_time;
 		if (get_current_time() - last_meal_time >= data->time_to_die)
 		{
-			printf("bonjour a tous\n");
 			printf_mutex(data, "died", data->philos[i].id);
 			pthread_mutex_lock(&data->run_sim_mtx);
 			data->run_sim = 0;
 			pthread_mutex_unlock(&data->run_sim_mtx);
+			pthread_mutex_unlock(&data->philos[i].last_meal_time_mtx);
 			return ;
 		}
 		pthread_mutex_unlock(&data->philos[i].last_meal_time_mtx);
+		usleep(100);
 		i++;
 	}
 }

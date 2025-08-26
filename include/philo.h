@@ -84,6 +84,7 @@ void	printf_mutex(t_data *data, char *msg, int id_philo);
 int		set_start_times(t_data *data);
 
 //	srcs/time.c
+int		ft_usleep_sim_running(t_data *data, int milliseconds);
 long	get_current_time(void);
 int		ft_usleep(long milliseconds);
 

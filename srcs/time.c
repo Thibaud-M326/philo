@@ -14,6 +14,20 @@
 #include <unistd.h>
 #include "philo.h"
 
+int	ft_usleep_sim_running(t_data *data, int milliseconds)
+{
+	long	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+	{
+		if (!is_sim_running(data))
+			return (1);
+		ft_usleep(1);
+	}
+	return (0);
+}
+
 long	get_current_time(void)
 {
 	struct timeval	time;
