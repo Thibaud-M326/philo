@@ -66,8 +66,8 @@ int	monitor(t_data *data)
 	while (is_sim_running(data))
 	{
 		is_a_philo_dead(data);
-		if (is_sim_running(data) && data->nb_must_eat != -1)
-			is_philos_ate_enough(data);
+		// if (is_sim_running(data) && data->nb_must_eat != -1)
+		// 	is_philos_ate_enough(data);
 	}
 	return (0);
 }
