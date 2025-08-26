@@ -12,14 +12,17 @@
 
 #include "philo.h"
 
-void	take_forks(t_philo *philo)
+int	take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 		if (!is_sim_running(philo->data))
+		{
 			pthread_mutex_unlock(philo->right_fork);
+			return (1);
+		}
 		pthread_mutex_lock(philo->left_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 	}
@@ -28,10 +31,14 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 		if (!is_sim_running(philo->data))
+		{
 			pthread_mutex_unlock(philo->left_fork);
+			return (1);
+		}
 		pthread_mutex_lock(philo->right_fork);
 		printf_mutex(philo->data, "has taken a fork", philo->id);
 	}
+	return (0);
 }
 
 void	put_forks(t_philo *philo)
@@ -44,7 +51,8 @@ int	eat(t_data *data, t_philo *philo)
 {
 	if (!is_sim_running(data))
 		return (0);
-	take_forks(philo);
+	if (take_forks(philo) == 1)
+		return (1);
 	printf_mutex(philo->data, "is eating", philo->id);
 	ft_usleep_sim_running(data, data->time_to_eat);
 	pthread_mutex_lock(&philo->last_meal_time_mtx);
@@ -68,8 +76,16 @@ int	sleeping(t_data *data, t_philo *philo)
 
 int	think(t_data *data, t_philo *philo)
 {
+	long	tte;
+	long	tts;
+
+	tte = data->time_to_eat;
+	tts = data->time_to_sleep;
 	if (!is_sim_running(data))
 		return (0);
-	printf_mutex(philo->data, "is thinking", philo->id);
+	if (data->nb_philo % 2 != 0)
+		ft_usleep_sim_running(data, 2 * tte - tts);
+	if (is_sim_running(data))
+		printf_mutex(philo->data, "is thinking", philo->id);
 	return (0);
 }
