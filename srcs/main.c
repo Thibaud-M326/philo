@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (init_philo(&data, argv) == NULL)
 		return (0);
-	if (create_philo_threads(&data) == 1)
+	if (philo_threads(&data) == 1)
 	{
 		clean_data(&data);
 		return (0);
@@ -32,17 +32,19 @@ int	main(int argc, char **argv)
 		join_philo_threads(&data);
 		return (0);
 	}
-	// clean_data(&data);
 	join_philo_threads(&data);
-
-	int i;
-	i = 0;
-	while (i < data.nb_philo)
-	{
-
-		printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
-		i++;
-	}
+	clean_data(&data);
 	return (0);
 }
 
+// if (data.nb_must_eat != -1)
+// {
+// 	int	i;
+// 	i = 0;
+// 	while (i < data.nb_philo)
+// 	{
+
+// 		printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
+// 		i++;
+// 	}
+// }

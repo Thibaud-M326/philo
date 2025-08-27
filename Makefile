@@ -13,11 +13,13 @@ SRC =									\
 	$(SRC_DIR)/is_sim_running.c			\
 	$(SRC_DIR)/main.c					\
 	$(SRC_DIR)/monitor.c				\
+	$(SRC_DIR)/one_philo_action.c		\
 	$(SRC_DIR)/philo_actions.c			\
 	$(SRC_DIR)/philo_routine.c			\
 	$(SRC_DIR)/philo_threads.c			\
 	$(SRC_DIR)/printf_mutex.c			\
 	$(SRC_DIR)/set_start_times.c		\
+	$(SRC_DIR)/take_forks.c				\
 	$(SRC_DIR)/time.c					\
 	$(SRC_DIR)/wait_start.c				\
 

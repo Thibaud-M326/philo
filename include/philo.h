@@ -15,16 +15,20 @@
 	#include <stdio.h>
 	#include <unistd.h>
 
-typedef struct s_data	t_data;
+typedef struct s_fork
+{
+	pthread_mutex_t		fork;
+	int					available;
+}	t_fork;
 
-//faire une structure pour les fork et leur bool
+typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
 	int					id;
 	pthread_t			philo;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
+	t_fork				*left_fork;
+	t_fork				*right_fork;
 	pthread_mutex_t		last_meal_time_mtx;
 	long				last_meal_time;
 	pthread_mutex_t		meals_eaten_mtx;
@@ -45,7 +49,7 @@ typedef struct s_data
 	pthread_mutex_t		print;
 	pthread_mutex_t		start_sim_mtx;
 	t_philo				*philos;
-	pthread_mutex_t		*forks;
+	t_fork				*forks;
 }	t_data;
 
 //	srcs/check_args.c
@@ -66,6 +70,9 @@ int		is_sim_running(t_data *data);
 //	srcs/monitor.c
 int		monitor(t_data *data);
 
+//	srcs/one_philo_action.c
+int		take_a_fork_and_die(t_philo *philo);
+
 //	srcs/philo_actions.c
 int		eat(t_data *data, t_philo *philo);
 int		sleeping(t_data *data, t_philo *philo);
@@ -73,9 +80,10 @@ int		think(t_data *data, t_philo *philo);
 
 //	srcs/philo_routine.c
 void	*philo_routine(void *v_philo);
+void	*one_philo_routine(void *v_philo);
 
 //	srcs/philo_threads.c
-int		create_philo_threads(t_data *data);
+int		philo_threads(t_data *data);
 int		join_philo_threads(t_data *data);
 
 //	srcs/printf_mutex.c
@@ -84,6 +92,9 @@ void	printf_mutex(t_data *data, char *msg, int id_philo);
 
 //	srcs/set_start_times.c
 int		set_start_times(t_data *data);
+
+//	srcs/take_forks.c
+int		take_forks(t_philo *philo);
 
 //	srcs/time.c
 int		ft_usleep_sim_running(t_data *data, int milliseconds);

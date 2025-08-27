@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+void	*one_philo_routine(void *v_philo)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)v_philo;
+	take_a_fork_and_die(philo);
+	return (NULL);
+}
+
 void	*philo_routine(void *v_philo)
 {
 	t_philo	*philo;

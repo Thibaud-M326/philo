@@ -37,6 +37,8 @@ int	is_pos_num(char *str_av)
 	{
 		if (!is_digit(str_av[i]))
 			return (0);
+		if (str_av[0] == '0' && str_av[1] == '\0')
+			return (0);
 		i++;
 	}
 	return (1);

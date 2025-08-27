@@ -34,26 +34,23 @@ t_data	*init_data_av(t_data *data, char **av)
 t_data	*init_data_forks(t_data *data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	data->forks = malloc(sizeof(t_fork) * data->nb_philo);
 	if (!data->forks)
 		return (NULL);
+	memset(data->forks, 0, (sizeof(t_fork) * data->nb_philo));
 	while (i < data->nb_philo)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		if (pthread_mutex_init(&data->forks[i].fork, NULL) != 0)
 		{
-			while (j < i)
-			{
-				pthread_mutex_destroy(&data->forks[i]);
-				j++;
-			}
+			while (i-- >= 0)
+				pthread_mutex_destroy(&data->forks[i].fork);
 			free(data->forks);
 			data->forks = NULL;
 			return (NULL);
 		}
+		data->forks[i].available = 1;
 		i++;
 	}
 	return (data);

@@ -22,7 +22,7 @@ void	clean_forks(t_data *data)
 	{
 		while (i < data->nb_philo)
 		{
-			pthread_mutex_destroy(&data->forks[i]);
+			pthread_mutex_destroy(&data->forks[i].fork);
 			i++;
 		}
 		free(data->forks);
@@ -45,6 +45,7 @@ void	clean_data_mutex(t_data *data)
 {
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->run_sim_mtx);
+	pthread_mutex_destroy(&data->start_sim_mtx);
 	return ;
 }
 

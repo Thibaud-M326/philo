@@ -12,39 +12,10 @@
 
 #include "philo.h"
 
-int	take_forks(t_philo *philo)
-{
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->right_fork);
-		printf_mutex(philo->data, "has taken a fork", philo->id);
-		if (!is_sim_running(philo->data))
-		{
-			pthread_mutex_unlock(philo->right_fork);
-			return (1);
-		}
-		pthread_mutex_lock(philo->left_fork);
-		printf_mutex(philo->data, "has taken a fork", philo->id);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->left_fork);
-		printf_mutex(philo->data, "has taken a fork", philo->id);
-		if (!is_sim_running(philo->data))
-		{
-			pthread_mutex_unlock(philo->left_fork);
-			return (1);
-		}
-		pthread_mutex_lock(philo->right_fork);
-		printf_mutex(philo->data, "has taken a fork", philo->id);
-	}
-	return (0);
-}
-
 void	put_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(&philo->left_fork->fork);
+	pthread_mutex_unlock(&philo->right_fork->fork);
 }
 
 int	eat(t_data *data, t_philo *philo)

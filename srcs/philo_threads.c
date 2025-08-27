@@ -38,6 +38,30 @@ int	create_philo_threads(t_data *data)
 	return (0);
 }
 
+int	create_one_philo_thread(t_data *data)
+{
+	if (pthread_create(
+			&data->philos->philo, NULL,
+			&one_philo_routine, data->philos) != 0)
+	{
+		pthread_join(data->philos->philo, NULL);
+		return (1);
+	}
+	return (0);
+}
+
+int	philo_threads(t_data *data)
+{
+	if (data->nb_philo == 1)
+	{
+		if (create_one_philo_thread(data) == 1)
+			return (1);
+	}
+	else if (create_philo_threads(data) == 1)
+		return (1);
+	return (0);
+}
+
 int	join_philo_threads(t_data *data)
 {
 	int	i;
