@@ -31,13 +31,16 @@ void	*philo_routine(void *v_philo)
 		ft_usleep(philo->data->time_to_eat);
 	while (is_sim_running(philo->data))
 	{
-		eat(philo->data, philo);
-		if (!is_sim_running(philo->data))
-			return (NULL);
-		sleeping(philo->data, philo);
-		if (!is_sim_running(philo->data))
-			return (NULL);
-		think(philo->data, philo);
+		if (philo->meals_eaten != philo->data->nb_must_eat)
+		{
+			eat(philo->data, philo);
+			if (!is_sim_running(philo->data))
+				return (NULL);
+			sleeping(philo->data, philo);
+			if (!is_sim_running(philo->data))
+				return (NULL);
+			think(philo->data, philo);
+		}
 	}
 	return (NULL);
 }

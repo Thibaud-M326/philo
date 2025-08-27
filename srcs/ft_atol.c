@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmaitre <thmaitre@student.42lyon.fr>      #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
-	int	nb;
-	int	i;
-	int	sign;
+	long	nb;
+	int		i;
+	int		sign;
 
 	nb = 0;
 	i = 0;

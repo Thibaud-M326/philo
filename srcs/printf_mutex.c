@@ -30,9 +30,12 @@ void	printf_mutex(t_data *data, char *msg, int id_philo)
 
 	if (is_sim_running(data))
 	{
-		sim_time = get_current_time() - data->start_time;
 		pthread_mutex_lock(&data->print);
-		printf("%ld %d %s\n", sim_time, id_philo, msg);
+		if (is_sim_running(data))
+		{
+			sim_time = get_current_time() - data->start_time;
+			printf("%ld %d %s\n", sim_time, id_philo, msg);
+		}
 		pthread_mutex_unlock(&data->print);
 	}
 	return ;

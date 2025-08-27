@@ -31,9 +31,8 @@ void	is_a_philo_dead(t_data *data)
 			pthread_mutex_unlock(&data->run_sim_mtx);
 			return ;
 		}
+		usleep(100);
 		i++;
-		if (data->nb_must_eat == -1)
-			usleep(100);
 	}
 }
 

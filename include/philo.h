@@ -58,8 +58,8 @@ int		check_args(int ac, char **av);
 //	srcs/clean_data.c
 void	clean_data(t_data *data);
 
-//	srcs/ft_atoi.c
-int		ft_atoi(const char *nptr);
+//	srcs/ft_atol.c
+long	ft_atol(const char *nptr);
 
 //	srcs/init_philo.c
 t_data	*init_philo(t_data *data, char **av);

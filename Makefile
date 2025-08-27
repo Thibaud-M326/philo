@@ -8,7 +8,7 @@ HEADER_DIR = ./include
 SRC =									\
 	$(SRC_DIR)/check_args.c				\
 	$(SRC_DIR)/clean_data.c				\
-	$(SRC_DIR)/ft_atoi.c				\
+	$(SRC_DIR)/ft_atol.c				\
 	$(SRC_DIR)/init_philo.c				\
 	$(SRC_DIR)/is_sim_running.c			\
 	$(SRC_DIR)/main.c					\

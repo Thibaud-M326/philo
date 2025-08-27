@@ -33,18 +33,18 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	join_philo_threads(&data);
+	if (data.nb_must_eat != -1)
+	{
+		int	i;
+		i = 0;
+		while (i < data.nb_philo)
+		{
+
+			printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
+			i++;
+		}
+	}
 	clean_data(&data);
 	return (0);
 }
 
-// if (data.nb_must_eat != -1)
-// {
-// 	int	i;
-// 	i = 0;
-// 	while (i < data.nb_philo)
-// 	{
-
-// 		printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
-// 		i++;
-// 	}
-// }
