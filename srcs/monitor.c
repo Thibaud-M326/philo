@@ -32,7 +32,7 @@ void	is_a_philo_dead(t_data *data)
 			return ;
 		}
 		i++;
-		if (data->nb_must_eat != -1)
+		if (data->nb_must_eat == -1)
 			usleep(100);
 	}
 }

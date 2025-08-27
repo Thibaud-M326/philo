@@ -34,14 +34,15 @@ int	main(int argc, char **argv)
 	}
 	// clean_data(&data);
 	join_philo_threads(&data);
+
+	int i;
+	i = 0;
+	while (i < data.nb_philo)
+	{
+
+		printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
+		i++;
+	}
+	return (0);
 }
 
-// int i;
-// i = 0;
-// while (i < data.nb_philo)
-// {
-
-// 	printf("philo_id:%d meals_eaten :%d\n", i, data.philos[i].meals_eaten);
-// 	i++;
-// }
-// return (0);

@@ -17,7 +17,7 @@
 
 typedef struct s_data	t_data;
 
-//faire une structure pour les fork
+//faire une structure pour les fork et leur bool
 
 typedef struct s_philo
 {
