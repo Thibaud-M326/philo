@@ -12,9 +12,6 @@
 
 #include <pthread.h>
 
-	#include <stdio.h>
-	#include <unistd.h>
-
 typedef struct s_fork
 {
 	pthread_mutex_t		fork;

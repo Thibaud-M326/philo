@@ -49,14 +49,14 @@ int	check_args(int ac, char **av)
 	int	i;
 	int	err;
 
-	i = 1;
+	i = 0;
 	err = 0;
 	if (ac < 5 || ac > 6)
 	{
 		print_usage();
 		return (0);
 	}
-	while (i < ac)
+	while (++i < ac)
 	{
 		if (!is_pos_num(av[i]))
 		{
@@ -69,7 +69,6 @@ int	check_args(int ac, char **av)
 			print_usage();
 			return (0);
 		}
-		i++;
 	}
 	return (1);
 }

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "philo.h"
 
 void	is_a_philo_dead(t_data *data)
