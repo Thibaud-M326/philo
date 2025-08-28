@@ -40,6 +40,7 @@ int	create_philo_threads(t_data *data)
 
 int	create_one_philo_thread(t_data *data)
 {
+	pthread_mutex_lock(&data->start_sim_mtx);
 	if (pthread_create(
 			&data->philos->philo, NULL,
 			&one_philo_routine, data->philos) != 0)
