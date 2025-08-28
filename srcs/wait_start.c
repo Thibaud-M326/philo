@@ -12,8 +12,14 @@
 
 #include "philo.h"
 
-void	wait_start(t_data *data)
+int	wait_start(t_data *data)
 {
 	pthread_mutex_lock(&data->start_sim_mtx);
+	if (data->start_sim == 1)
+	{
+		pthread_mutex_unlock(&data->start_sim_mtx);
+		return (1);
+	}
 	pthread_mutex_unlock(&data->start_sim_mtx);
+	return (0);
 }

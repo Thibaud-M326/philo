@@ -48,6 +48,7 @@ typedef struct s_data
 	int					run_sim;
 	pthread_mutex_t		print;
 	pthread_mutex_t		start_sim_mtx;
+	int					start_sim;
 	t_philo				*philos;
 	t_fork				*forks;
 }	t_data;
@@ -102,4 +103,4 @@ long	get_current_time(void);
 int		ft_msleep(long milliseconds);
 
 //	srcs/wait_start.c
-void	wait_start(t_data *data);
+int		wait_start(t_data *data);

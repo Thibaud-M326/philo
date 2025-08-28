@@ -15,10 +15,8 @@
 int	create_philo_threads(t_data *data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	pthread_mutex_lock(&data->start_sim_mtx);
 	while (i < data->nb_philo)
 	{
@@ -26,15 +24,15 @@ int	create_philo_threads(t_data *data)
 				&data->philos[i].philo, NULL,
 				&philo_routine, &data->philos[i]) != 0)
 		{
-			while (j < i)
-			{
-				pthread_join(data->philos[j].philo, NULL);
-				j++;
-			}
+			data->start_sim = 0;
+			pthread_mutex_unlock(&data->start_sim_mtx);
+			while (i-- >= 0)
+				pthread_join(data->philos[i].philo, NULL);
 			return (1);
 		}
 		i++;
 	}
+	data->start_sim = 1;
 	return (0);
 }
 
@@ -45,9 +43,12 @@ int	create_one_philo_thread(t_data *data)
 			&data->philos->philo, NULL,
 			&one_philo_routine, data->philos) != 0)
 	{
+		data->start_sim = 0;
+		pthread_mutex_unlock(&data->start_sim_mtx);
 		pthread_join(data->philos->philo, NULL);
 		return (1);
 	}
+	data->start_sim = 1;
 	return (0);
 }
 
