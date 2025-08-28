@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "philo.h"
 
-int	ft_usleep_sim_running(t_data *data, int milliseconds)
+int	ft_msleep_sim_running(t_data *data, int milliseconds)
 {
 	long	start;
 
@@ -23,7 +23,7 @@ int	ft_usleep_sim_running(t_data *data, int milliseconds)
 	{
 		if (!is_sim_running(data))
 			return (1);
-		ft_usleep(1);
+		ft_msleep(1);
 	}
 	return (0);
 }
@@ -39,7 +39,7 @@ long	get_current_time(void)
 	return (start_time);
 }
 
-int	ft_usleep(long milliseconds)
+int	ft_msleep(long milliseconds)
 {
 	long	start;
 

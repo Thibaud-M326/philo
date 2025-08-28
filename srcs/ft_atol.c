@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "philo.h"
 
-long	ft_atol(const char *nptr)
+long	ft_atol(const char *nptr, int *err)
 {
-	long	nb;
-	int		i;
-	int		sign;
+	unsigned long	nb;
+	int				i;
+	int				sign;
 
 	nb = 0;
 	i = 0;
@@ -34,6 +35,8 @@ long	ft_atol(const char *nptr)
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		nb = nb * 10 + (nptr[i] - 48);
+		if (nb > LONG_MAX && sign == 1)
+			*err = 1;
 		i++;
 	}
 	return (nb * sign);

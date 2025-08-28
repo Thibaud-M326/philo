@@ -28,9 +28,6 @@ int	is_digit(int c)
 	return (0);
 }
 
-// meals eaten valeur pas bonne, les philos mangent trop (./philo 8 800 200 200 7 | grep "is eating" | wc -l)
-// ne finit pas sur is eating avec un nombre de meals a manger
-
 int	is_pos_num(char *str_av)
 {
 	int	i;
@@ -49,9 +46,11 @@ int	is_pos_num(char *str_av)
 
 int	check_args(int ac, char **av)
 {
-	int		i;
+	int	i;
+	int	err;
 
 	i = 1;
+	err = 0;
 	if (ac < 5 || ac > 6)
 	{
 		print_usage();
@@ -64,7 +63,8 @@ int	check_args(int ac, char **av)
 			print_usage();
 			return (0);
 		}
-		if (ft_atol(av[i]) >= 2147483647)
+		ft_atol(av[i], &err);
+		if (err != 0)
 		{
 			print_usage();
 			return (0);

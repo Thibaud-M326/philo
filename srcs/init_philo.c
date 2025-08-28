@@ -17,13 +17,15 @@
 
 t_data	*init_data_av(t_data *data, char **av)
 {
+	int	err;
+
 	memset(data, 0, sizeof(t_data));
-	data->nb_philo = ft_atol(av[1]);
-	data->time_to_die = ft_atol(av[2]);
-	data->time_to_eat = ft_atol(av[3]);
-	data->time_to_sleep = ft_atol(av[4]);
+	data->nb_philo = ft_atol(av[1], &err);
+	data->time_to_die = ft_atol(av[2], &err);
+	data->time_to_eat = ft_atol(av[3], &err);
+	data->time_to_sleep = ft_atol(av[4], &err);
 	if (av[5])
-		data->nb_must_eat = ft_atol(av[5]);
+		data->nb_must_eat = ft_atol(av[5], &err);
 	else
 		data->nb_must_eat = -1;
 	data->start_time = 0;

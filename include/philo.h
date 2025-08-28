@@ -59,7 +59,7 @@ int		check_args(int ac, char **av);
 void	clean_data(t_data *data);
 
 //	srcs/ft_atol.c
-long	ft_atol(const char *nptr);
+long	ft_atol(const char *nptr, int *err);
 
 //	srcs/init_philo.c
 t_data	*init_philo(t_data *data, char **av);
@@ -97,9 +97,9 @@ int		set_start_times(t_data *data);
 int		take_forks(t_philo *philo);
 
 //	srcs/time.c
-int		ft_usleep_sim_running(t_data *data, int milliseconds);
+int		ft_msleep_sim_running(t_data *data, int milliseconds);
 long	get_current_time(void);
-int		ft_usleep(long milliseconds);
+int		ft_msleep(long milliseconds);
 
 //	srcs/wait_start.c
 void	wait_start(t_data *data);

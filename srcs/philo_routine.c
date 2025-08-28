@@ -29,11 +29,13 @@ void	*philo_routine(void *v_philo)
 	philo = (t_philo *)v_philo;
 	wait_start(philo->data);
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->data->time_to_eat);
+		ft_msleep(philo->data->time_to_eat);
 	while (is_sim_running(philo->data))
 	{
-		if (philo->meals_eaten != philo->data->nb_must_eat)
-		{
+		// pthread_mutex_lock(&philo->meals_eaten_mtx);
+		// if (philo->meals_eaten != philo->data->nb_must_eat)
+		// {
+			// pthread_mutex_unlock(&philo->meals_eaten_mtx);
 			eat(philo->data, philo);
 			if (!is_sim_running(philo->data))
 				return (NULL);
@@ -41,7 +43,9 @@ void	*philo_routine(void *v_philo)
 			if (!is_sim_running(philo->data))
 				return (NULL);
 			think(philo->data, philo);
-		}
+		// }
+		// else
+			// pthread_mutex_unlock(&philo->meals_eaten_mtx);
 	}
 	return (NULL);
 }

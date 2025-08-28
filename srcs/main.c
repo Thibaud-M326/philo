@@ -47,4 +47,3 @@ int	main(int argc, char **argv)
 	clean_data(&data);
 	return (0);
 }
-
